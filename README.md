@@ -3,7 +3,7 @@
 This repository documents my problem-solving progress in **C, Python, and SQL** during and after high school.  
 It serves as a consolidated archive of solutions solved on **HackerRank**, organized by language and learning stage.
 
-The primary goal of this repository is to demonstrate **consistent practice, foundational understanding, and progression over time**, rather than to showcase optimized or competitive solutions.
+The primary goal of this repository is to demonstrate **consistent practice, foundational understanding, and progression over time**, it is **NOT** a showcase of **Optimal or Competitive Solutions**.
 
 ---
 
@@ -58,5 +58,7 @@ This section is intended to demonstrate **query familiarity and syntax understan
 - Most problems were solved **approximately a year ago** as part of coursework and structured practice.
 - Code has not been rewritten for optimization or stylistic consistency.
 - This repository is **not intended as a tutorial or best-practice reference**, but as a record of learning and problem-solving history.
+
+## TL;DR: This personal archive of very basic HackerRank solutions, maintained to document my early learning and progress in C, Python, and SQL rather than to showcase advanced or optimized code.
 
 Ok thanks bye :) 

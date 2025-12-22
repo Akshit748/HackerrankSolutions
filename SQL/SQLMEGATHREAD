@@ -1,0 +1,68 @@
+-----------------REVISION + CITIES--------------------------------
+
+select * from CITY WHERE POPULATION > 100000 AND COUNTRYCODE='USA';
+
+SELECT NAME FROM CITY WHERE POPULATION>120000 AND COUNTRYCODE='USA';
+
+SELECT * FROM CITY;
+
+SELECT * FROM CITY WHERE ID=1661;
+
+SELECT * FROM CITY WHERE COUNTRYCODE='JPN';
+
+SELECT NAME FROM CITY WHERE COUNTRYCODE='JPN';
+-----------------------------------------------------------------
+
+-------------------WEATHER OBSERVATION STATION-------------------
+SELECT CITY,STATE FROM STATION;
+
+SELECT DISTINCT(CITY) FROM STATION WHERE ID%2=0;
+
+SELECT COUNT(city) - COUNT(DISTINCT city) FROM station;
+
+WITH cte_city_name_length AS (SELECT CITY, LENGTH(CITY) as name_length FROM STATION) (SELECT CITY, (SELECT MIN(name_length) FROM cte_city_name_length) FROM cte_city_name_length WHERE name_length = (SELECT MIN(name_length) FROM cte_city_name_length) ORDER BY CITY LIMIT 1) UNION (SELECT CITY,(SELECT MAX(name_length) FROM cte_city_name_length) FROM cte_city_name_length WHERE name_length = (SELECT MAX(name_length) FROM cte_city_name_length) ORDER BY CITY LIMIT 1);
+
+SELECT CITY FROM STATION GROUP BY CITY HAVING substr(CITY,1,1) IN ('A','E','I','O','U');
+
+SELECT DISTINCT CITY FROM STATION WHERE CITY LIKE '%a' OR CITY LIKE '%e' OR CITY LIKE '%i' OR CITY LIKE '%o' OR CITY LIKE '%u';
+
+select distinct city from station where left(upper(city),1) in ('A','E','I','O','U') and right(upper(city),1) in ('A','E','I','O','U') order by city asc;
+
+SELECT DISTINCT CITY FROM STATION WHERE left(upper(city),1) NOT in ('A','E','I','O','U');
+
+SELECT DISTINCT CITY from STATION where RIGHT(upper(city),1) not in ('A', 'E', 'I', 'O', 'U');
+
+SELECT DISTINCT CITY FROM STATION WHERE left(upper(CITY),1) not in ('A', 'E', 'I', 'O', 'U') or right(upper(CITY),1) not in ('A', 'E','I', 'O', 'U');
+
+SELECT DISTINCT CITY
+FROM STATION
+WHERE LOWER(LEFT(CITY, 1)) NOT IN ('a', 'e', 'i', 'o', 'u')
+AND LOWER(RIGHT(CITY, 1)) NOT IN ('a', 'e', 'i', 'o', 'u');
+---------------------------------------------------------------------
+
+-----------------------MISC------------------------------------------
+SELECT NAME FROM EMPLOYEE ORDER BY NAME ASC;
+
+SELECT NAME FROM EMPLOYEE WHERE SALARY>2000 AND MONTHS<10 ORDER BY EMPLOYEE_ID ASC;
+
+SELECT CASE 
+    WHEN A + B + C <= 2 * GREATEST(A, B, C) THEN 'Not A Triangle'
+    WHEN A = B AND B = C THEN 'Equilateral'
+    WHEN A = B OR A = C OR B = C THEN 'Isosceles'
+    ELSE 'Scalene'
+END
+FROM triangles;
+
+SELECT name || '(' || LEFT(occupation, 1) || ')' AS result
+FROM OCCUPATIONS
+ORDER BY name;
+
+SELECT 'There are a total of ' || CAST(COUNT(*) AS VARCHAR(10)) || ' ' || LOWER(occupation) || 's.' AS result
+FROM OCCUPATIONS
+GROUP BY occupation
+ORDER BY COUNT(*), occupation;
+
+SELECT MAX(total_earnings) AS max_earnings, COUNT(*) AS employee_count FROM ( SELECT salary * months AS total_earnings FROM Employee ) AS earnings WHERE total_earnings = ( SELECT MAX(salary * months) FROM Employee );
+
+SELECT SUM(CITY.POPULATION) FROM CITY JOIN COUNTRY ON CITY.COUNTRYCODE=COUNTRY.CODE WHERE UPPER(CONTINENT) = 'ASIA'
+--------------------------------------------------------------------
